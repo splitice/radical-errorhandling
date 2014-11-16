@@ -1,6 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Handlers;
 
+use Radical\Core\ErrorHandling\Errors\PHPError;
 use Radical\Core\ErrorHandling\IToCode;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorBase;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
@@ -14,7 +15,23 @@ class CLIOutputErrorHandler extends ErrorHandlerBase {
 	function error(ErrorBase $error) {
 		if($error->isFatal()){
 			throw $error;
-		}
+		} else if($error instanceof PHPError){
+            switch($error->getErrno()){
+                case E_COMPILE_WARNING:
+                case E_CORE_WARNING:
+                case E_USER_WARNING:
+                case E_WARNING:
+                    \Radical\CLI\Output\Error::Warning($error->getMessage());
+                    break;
+                case E_NOTICE:
+                case E_STRICT:
+                case E_USER_NOTICE:
+                case E_USER_DEPRECATED:
+                case E_DEPRECATED:
+                    \Radical\CLI\Output\Error::Notice($error->getMessage());
+                    break;
+            }
+        }
 	}
 	function exception(ErrorException $error){
 		if($this->in_error){

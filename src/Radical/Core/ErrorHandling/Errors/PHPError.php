@@ -31,24 +31,7 @@ class PHPError extends Internal\ErrorBase {
 		
 		parent::__construct($message,static::HEADER,$fatal);
 		
-		//CLI Display PHP errors
-		if(!$fatal && \Radical\Core\Server::isCLI()){
-			switch($errno){
-				case E_COMPILE_WARNING:
-				case E_CORE_WARNING:
-				case E_USER_WARNING:
-				case E_WARNING:
-					\Radical\CLI\Output\Error::Warning($message);
-					break;
-				case E_NOTICE:
-				case E_STRICT:
-				case E_USER_NOTICE:
-				case E_USER_DEPRECATED:
-				case E_DEPRECATED:
-					\Radical\CLI\Output\Error::Notice($message);
-					break;
-			}
-		}
+
 	}
     public function getErrno(){
         return $this->errno;
