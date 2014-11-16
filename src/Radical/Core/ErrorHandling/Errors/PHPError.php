@@ -4,8 +4,15 @@ namespace Radical\Core\ErrorHandling\Errors;
 use Radical\Core\Server;
 class PHPError extends Internal\ErrorBase {
 	const HEADER = 'Site Error (PHP)';
+    private $errno;
+    private $error_text;
+    private $error_location;
 	
 	function __construct($errno, $msg_text, Structs\LocationReference $where){
+        $this->errno = $errno;
+        $this->error_text = $msg_text;
+        $this->error_location = $where;
+
 		//Build Error page
 		if(!\Radical\Core\Server::isProduction() || \Radical\Core\Server::isCLI()){
 			$message = 'A PHP error occured at '.$where->toShort().': '.$msg_text;
@@ -43,6 +50,15 @@ class PHPError extends Internal\ErrorBase {
 			}
 		}
 	}
+    public function getErrno(){
+        return $this->errno;
+    }
+    public function getErrorText(){
+        return $this->error_text;
+    }
+    public function getErrorLocation(){
+        return $this->error_location;
+    }
 	static function init(){
 		ini_set('display_errors','On');
 		$handler = array (get_called_class(), 'handler' );

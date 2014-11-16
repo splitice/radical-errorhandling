@@ -2,8 +2,8 @@
 namespace Radical\Core\ErrorHandling\Errors\Structs;
 
 class LocationReference {
-	private $file;
-	private $line;
+	public $file;
+	public $line;
 	
 	function __construct($file,$line){
 		$this->file = $file;
