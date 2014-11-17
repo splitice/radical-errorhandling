@@ -5,6 +5,9 @@ use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
 
 /* STATIC */
 abstract class Handler {
+    /**
+     * @var Handler
+     */
 	static $instance;
 	
 	/**
@@ -13,11 +16,13 @@ abstract class Handler {
 	function __construct(){
 		self::$instance = $this;
 	}
+
+
 	
 	/**
 	 * Get instance (singleton type pattern)
 	 * 
-	 * @return \Core\ErrorHandling\Handler instance of
+	 * @return Handler instance of
 	 */
 	static function getInstance(){
 		if(!self::$instance){

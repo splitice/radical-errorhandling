@@ -1,6 +1,7 @@
 <?php
 namespace Radical\Core\ErrorHandling\Handlers;
 
+use Radical\Core\ErrorHandling\Errors\ExceptionError;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorBase;
 use Radical\Core\ErrorHandling\Errors\Internal\ErrorException;
 use Radical\Core\ErrorHandling\Handler;
@@ -25,6 +26,11 @@ abstract class ErrorHandlerBase extends Handler {
 		
 		parent::__construct();
 	}
+
+    function exception_handler(\Exception $ex){
+        $eex = new ExceptionError($ex, false);
+        return $this->exception($eex);
+    }
 	
 	abstract function error(ErrorBase $error);
 	abstract function exception(ErrorException $error);

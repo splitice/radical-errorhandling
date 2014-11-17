@@ -29,6 +29,9 @@ class ExceptionError extends Internal\ErrorBase {
 	function getDebugMessage(){
 		return $this->ex->getMessage();
 	}
+    function getException(){
+        return $this->ex;
+    }
 	
 	//If args contains closure
 	//emulate exception
