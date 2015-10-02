@@ -55,7 +55,7 @@ class PHPError extends Internal\ErrorBase {
 		if (! (error_reporting () & $errno)) {
 			return true;
 		}
-		if ($errno != E_STRICT) { //E_STRICT, well we would like it but not PEAR
+		if (!($errno & E_STRICT)) { //E_STRICT, well we would like it but not PEAR
 			new static($errno, $msg_text, new Structs\LocationReference($errfile, $errline));
 			return Server::isProduction();
 		}
