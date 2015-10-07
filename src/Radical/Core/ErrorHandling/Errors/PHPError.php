@@ -49,13 +49,13 @@ class PHPError extends Internal\ErrorBase {
 		set_error_handler ( $handler, error_reporting ());
 	}
 	static function handler($errno, $msg_text, $errfile, $errline) {
-		//die(var_dump( $msg_text, $errfile, $errline));
-		//if(isset($_GET['action']) && $_GET['action']=='ipn')
-		//	file_put_contents('/tmp/tt.'.time(), $msg_text);
 		if (! (error_reporting () & $errno)) {
 			return true;
 		}
 		if (!($errno & E_STRICT)) { //E_STRICT, well we would like it but not PEAR
+			if(($errno & E_WARNING) && preg_match('/^Declaration of .+ should be compatible with/', $msg_text)){
+				return true;
+			}
 			new static($errno, $msg_text, new Structs\LocationReference($errfile, $errline));
 			return Server::isProduction();
 		}
