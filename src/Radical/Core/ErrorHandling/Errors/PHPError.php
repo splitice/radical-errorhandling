@@ -16,9 +16,9 @@ class PHPError extends Internal\ErrorBase {
 
 		//Build Error page
 		if(!\Radical\Core\Server::isProduction() || \Radical\Core\Server::isCLI()){
-			$message = 'A PHP error occured at '.$where->toShort().': '.$msg_text;
+			$message = 'A PHP error occurred at '.$where->toShort().': '.$msg_text;
 		}else{
-			$message = 'An error has occured in the script.';
+			$message = 'An error has occurred in the script.';
 			global $_ADMIN_EMAIL;
 			if(isset($_ADMIN_EMAIL)){
 				$message .= ' Please report this to an administrator at '.$_ADMIN_EMAIL.'.';

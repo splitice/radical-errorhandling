@@ -10,13 +10,13 @@ class ExceptionError extends Internal\ErrorBase {
 		
 		//Build Error page
 		if(!\Radical\Core\Server::isCLI() && \Radical\Core\Server::isProduction()){
-			$message = 'An exception has occured in the script.';
+			$message = 'An exception has occurred in the script.';
 			global $_ADMIN_EMAIL;
 			if(isset($_ADMIN_EMAIL)){
 				$message .= ' Please report this to an administrator at '.$_ADMIN_EMAIL.'.';
 			}
 		}else{
-			$message = 'An exception occured at '.$ex->getFile().'@'.$ex->getLine().': '.$ex->getMessage();
+			$message = 'An exception occurred at '.$ex->getFile().'@'.$ex->getLine().': '.$ex->getMessage();
 		}
 		
 		$header = sprintf(static::HEADER,ltrim(get_class($ex),'\\'));
