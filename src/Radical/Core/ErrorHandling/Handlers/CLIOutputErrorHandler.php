@@ -58,6 +58,7 @@ class CLIOutputErrorHandler extends ErrorHandlerBase {
 			$message = ' '.$message;
 		}
 		$output = sprintf(static::CLI_START,$code,$message);
+		$output.= "\r\n" . $error->getTraceAsString();
 		
 		//If Threaded include ThreadID
 		/*$T = Thread::current();
