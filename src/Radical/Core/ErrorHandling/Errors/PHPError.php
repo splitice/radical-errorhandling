@@ -44,7 +44,6 @@ class PHPError extends Internal\ErrorBase {
         return $this->error_location;
     }
 	static function init(){
-		ini_set('display_errors','On');
 		$handler = array (get_called_class(), 'handler' );
 		set_error_handler ( $handler, error_reporting ());
 	}

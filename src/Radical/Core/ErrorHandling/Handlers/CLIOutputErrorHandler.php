@@ -54,7 +54,7 @@ class CLIOutputErrorHandler extends ErrorHandlerBase {
 		
 		//Format Output
 		$message = $error->getMessage();
-		if($message{0} != '['){
+		if($message[0] != '['){
 			$message = ' '.$message;
 		}
 		$output = sprintf(static::CLI_START,$code,$message);
