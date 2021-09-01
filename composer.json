@@ -12,6 +12,6 @@
       "Radical" : "src"
     }
   },
-  "license" : "BSD",
+  "license" : "BSD-2-Clause",
   "type" : "library"
 }
